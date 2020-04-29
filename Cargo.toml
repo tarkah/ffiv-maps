@@ -1,0 +1,26 @@
+[package]
+name = "ffiv-maps"
+version = "0.1.0"
+authors = ["tarkah <admin@tarkah.dev>"]
+edition = "2018"
+default-run = "ffiv-maps"
+
+[[bin]]
+name = "meta-export"
+
+[dependencies]
+anyhow = "1.0"
+byteorder = "1.3"
+ron = "0.5"
+serde = { version = "1.0", features = ['derive'] }
+structopt = "0.3"
+
+[dependencies.amethyst]
+version = "0.15.0"
+default-features = false
+features = ["animation"]
+
+[features]
+default = ["vulkan"]
+metal = ["amethyst/metal"]
+vulkan = ["amethyst/vulkan"]

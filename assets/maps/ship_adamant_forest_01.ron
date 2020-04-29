@@ -1,0 +1,1007 @@
+(
+    width: 9,
+    height: 11,
+    base: "/home/tarkah/Documents/ffiv/uncompressed/output/data/CN_adamant_forest/ship_c_base.png",
+    var: "/home/tarkah/Documents/ffiv/uncompressed/output/data/CN_adamant_forest/ship_c_var.png",
+    anm: "/home/tarkah/Documents/ffiv/uncompressed/output/data/CN_adamant_forest/ship_c_anm.png",
+    layers: [
+        (
+            cells: [
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [0]
+                (
+                    index: 16,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [1]
+                (
+                    index: 135,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [2]
+                (
+                    index: 135,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [3]
+                (
+                    index: 136,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [4]
+                (
+                    index: 137,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [5]
+                (
+                    index: 135,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [6]
+                (
+                    index: 140,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [7]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [8]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [9]
+                (
+                    index: 106,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [10]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [11]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [12]
+                (
+                    index: 138,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [13]
+                (
+                    index: 154,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [14]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [15]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [16]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [17]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [18]
+                (
+                    index: 106,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [19]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [20]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [21]
+                (
+                    index: 139,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [22]
+                (
+                    index: 152,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [23]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [24]
+                (
+                    index: 51,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [25]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [26]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [27]
+                (
+                    index: 32,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [28]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [29]
+                (
+                    index: 1,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [30]
+                (
+                    index: 50,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [31]
+                (
+                    index: 3,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [32]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [33]
+                (
+                    index: 96,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [34]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [35]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [36]
+                (
+                    index: 32,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [37]
+                (
+                    index: 32,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [38]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [39]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [40]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [41]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [42]
+                (
+                    index: 96,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [43]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [44]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [45]
+                (
+                    index: 32,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [46]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [47]
+                (
+                    index: 32,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [48]
+                (
+                    index: 157,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [49]
+                (
+                    index: 32,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [50]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [51]
+                (
+                    index: 96,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [52]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [53]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [54]
+                (
+                    index: 32,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [55]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [56]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [57]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [58]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [59]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [60]
+                (
+                    index: 96,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [61]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [62]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [63]
+                (
+                    index: 32,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [64]
+                (
+                    index: 32,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [65]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [66]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [67]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [68]
+                (
+                    index: 32,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [69]
+                (
+                    index: 96,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [70]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [71]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [72]
+                (
+                    index: 111,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [73]
+                (
+                    index: 38,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [74]
+                (
+                    index: 38,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [75]
+                (
+                    index: 38,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [76]
+                (
+                    index: 38,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [77]
+                (
+                    index: 134,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [78]
+                (
+                    index: 22,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [79]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [80]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [81]
+                (
+                    index: 108,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [82]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [83]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [84]
+                (
+                    index: 18,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [85]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [86]
+                (
+                    index: 33,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [87]
+                (
+                    index: 15,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [88]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [89]
+                (
+                    index: 48,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [90]
+                (
+                    index: 108,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [91]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [92]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [93]
+                (
+                    index: 109,
+                    kind: Var,
+                    trigger: Unknown(143),
+                ),// [94]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [95]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [96]
+                (
+                    index: 23,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [97]
+                (
+                    index: 49,
+                    kind: Base,
+                    trigger: Unknown(143),
+                ),// [98]
+            ],
+        ),// [0]
+        (
+            cells: [
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [0]
+                (
+                    index: 107,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [1]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [2]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [3]
+                (
+                    index: 2,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [4]
+                (
+                    index: 155,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [5]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [6]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [7]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [8]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [9]
+                (
+                    index: 107,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [10]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [11]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [12]
+                (
+                    index: 95,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [13]
+                (
+                    index: 153,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [14]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Blocker,
+                ),// [15]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [16]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [17]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [18]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [19]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [20]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [21]
+                (
+                    index: 2,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [22]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [23]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Unknown13,
+                ),// [24]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [25]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [26]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [27]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [28]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [29]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [30]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [31]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [32]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [33]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [34]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [35]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [36]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [37]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [38]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [39]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [40]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [41]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [42]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [43]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [44]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [45]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [46]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [47]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Blocker,
+                ),// [48]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [49]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [50]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [51]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [52]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [53]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [54]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [55]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [56]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [57]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [58]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [59]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [60]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [61]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [62]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [63]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [64]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [65]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [66]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [67]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [68]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [69]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [70]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [71]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [72]
+                (
+                    index: 107,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [73]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [74]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [75]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [76]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [77]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [78]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [79]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [80]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [81]
+                (
+                    index: 107,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [82]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [83]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [84]
+                (
+                    index: 39,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [85]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [86]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [87]
+                (
+                    index: 38,
+                    kind: Var,
+                    trigger: Passable,
+                ),// [88]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [89]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [90]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [91]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [92]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [93]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [94]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [95]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [96]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [97]
+                (
+                    index: 0,
+                    kind: Base,
+                    trigger: Passable,
+                ),// [98]
+            ],
+        ),// [1]
+    ],
+)

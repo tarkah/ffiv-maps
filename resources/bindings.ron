@@ -1,0 +1,7 @@
+(
+  axes: {},
+  actions: {
+    "next": [ [Key(Right)] ],
+    "previous": [ [Key(Left)] ]
+  },
+)
