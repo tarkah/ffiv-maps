@@ -3,7 +3,7 @@ use amethyst::{
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
-use crate::components::camera::{load_camera, reset_camera};
+use crate::components::camera::{center_camera_on_map, load_camera};
 use crate::resources::{
     game::Game,
     map::{Map, MapSpriteSheets, TextureKind},
@@ -65,7 +65,7 @@ impl SimpleState for LoadState {
 
                 data.world.insert(map_sheets);
 
-                reset_camera(data.world);
+                center_camera_on_map(data.world, &map);
 
                 map.load_map(data.world);
 

@@ -135,7 +135,7 @@ impl Map {
             let mut transform = Transform::default();
             transform.set_translation_xyz(
                 (idx % self.width) as f32 * 32.0 + 16.0,
-                screen_height - (((idx / self.width) as f32) * 32.0 + 16.0),
+                (self.width as f32 * 32.0) - (((idx / self.width) as f32) * 32.0 + 16.0),
                 -1.0 * layer_idx as f32,
             );
 

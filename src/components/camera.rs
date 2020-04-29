@@ -6,6 +6,8 @@ use amethyst::{
     window::ScreenDimensions,
 };
 
+use crate::resources::map::Map;
+
 pub fn load_camera(world: &mut World) {
     let (width, height) = {
         let dim = world.fetch::<ScreenDimensions>();
@@ -21,16 +23,15 @@ pub fn load_camera(world: &mut World) {
         .build();
 }
 
-pub fn reset_camera(world: &mut World) {
-    let (width, height) = {
-        let dim = world.fetch::<ScreenDimensions>();
-        (dim.width(), dim.height())
-    };
-
+pub fn center_camera_on_map(world: &mut World, map: &Map) {
     let mut transforms = world.write_storage::<Transform>();
     let cameras = world.read_storage::<Camera>();
 
     for (transform, _) in (&mut transforms, &cameras).join() {
-        transform.set_translation_xyz(width / 2.0, height / 2.0, 10.0);
+        transform.set_translation_xyz(
+            (map.width as f32 * 32.0) / 2.0,
+            (map.height as f32 * 32.0) / 2.0,
+            10.0,
+        );
     }
 }
