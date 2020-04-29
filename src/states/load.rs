@@ -1,23 +1,18 @@
 use amethyst::{
-    animation::AnimationControl,
     assets::{AssetStorage, Handle, Loader, ProgressCounter, RonFormat},
-    core::{Parent, Transform},
-    ecs::{
-        prelude::{Dispatcher, DispatcherBuilder, World},
-        Entity, Join, WriteStorage,
-    },
+    core::Transform,
+    ecs::{prelude::World, Join},
     prelude::{Builder, GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
     renderer::{
         camera::{Camera, Projection},
         formats::texture::ImageFormat,
-        sprite::{SpriteGrid, SpriteRender, SpriteSheetHandle},
+        sprite::{SpriteGrid, SpriteSheetHandle},
         SpriteSheet, Texture,
     },
     window::ScreenDimensions,
 };
 
-use std::collections::HashMap;
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use crate::resources::{Map, TextureKind};
 

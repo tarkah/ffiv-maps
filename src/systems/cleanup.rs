@@ -1,7 +1,8 @@
-use amethyst::derive::SystemDesc;
-use amethyst::ecs::{Entities, Join, Read, ReadStorage, System, SystemData, Write};
-use amethyst::input::{InputHandler, StringBindings};
-use amethyst::utils::removal::{exec_removal, Removal};
+use amethyst::{
+    derive::SystemDesc,
+    ecs::{Entities, Read, ReadStorage, System, SystemData},
+    utils::removal::{exec_removal, Removal},
+};
 
 use crate::states::Game;
 

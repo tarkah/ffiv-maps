@@ -1,6 +1,8 @@
-use amethyst::derive::SystemDesc;
-use amethyst::ecs::{Join, Read, ReadStorage, System, SystemData, Write};
-use amethyst::input::{InputHandler, StringBindings};
+use amethyst::{
+    derive::SystemDesc,
+    ecs::{Read, System, SystemData, Write},
+    input::{InputHandler, StringBindings},
+};
 
 use crate::states::Game;
 

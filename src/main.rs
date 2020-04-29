@@ -2,8 +2,8 @@
 #![allow(clippy::type_complexity)]
 
 use amethyst::{
-    animation::{AnimationBundle, AnimationControlSystem},
-    assets::{PrefabLoaderSystemDesc, Processor},
+    animation::AnimationBundle,
+    assets::Processor,
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     renderer::{
@@ -13,7 +13,7 @@ use amethyst::{
         RenderingBundle,
     },
     ui::{RenderUi, UiBundle},
-    utils::{application_root_dir, fps_counter::FpsCounterBundle},
+    utils::application_root_dir,
     Application, GameDataBuilder,
 };
 

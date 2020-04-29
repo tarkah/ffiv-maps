@@ -1,16 +1,11 @@
 use amethyst::{
     animation::{
-        get_animation_set, Animation, AnimationCommand, AnimationControl, AnimationControlSet,
-        ControlState, EndControl, InterpolationFunction, Sampler, SpriteRenderChannel,
-        SpriteRenderPrimitive,
+        get_animation_set, Animation, AnimationCommand, AnimationControlSet, EndControl,
+        InterpolationFunction, Sampler, SpriteRenderChannel, SpriteRenderPrimitive,
     },
-    assets::{Asset, AssetStorage, Handle, ProcessingState},
-    core::{
-        math::{Vector2, Vector3},
-        Transform, WithNamed,
-    },
+    assets::{Asset, AssetStorage, Handle},
+    core::Transform,
     ecs::{prelude::World, VecStorage},
-    error::Error,
     prelude::{Builder, WorldExt},
     renderer::{sprite::SpriteRender, transparent::Transparent},
     utils::removal::Removal,
@@ -18,7 +13,6 @@ use amethyst::{
 };
 use serde::{Deserialize, Serialize};
 
-use std::collections::HashMap;
 use std::path::PathBuf;
 
 use crate::states::MapSpriteSheets;
@@ -97,7 +91,7 @@ impl Map {
         }
     }
 
-    fn load_layer(&self, world: &mut World, layer: &Layer, idx: usize) {
+    fn load_layer(&self, world: &mut World, layer: &Layer, layer_idx: usize) {
         let screen_height = {
             let dim = world.fetch::<ScreenDimensions>();
             dim.height()
@@ -128,7 +122,7 @@ impl Map {
             transform.set_translation_xyz(
                 (idx % self.width) as f32 * 32.0 + 16.0,
                 screen_height - (((idx / self.width) as f32) * 32.0 + 16.0),
-                -1.0 * idx as f32,
+                -1.0 * layer_idx as f32,
             );
 
             let entity = world

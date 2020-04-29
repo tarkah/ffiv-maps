@@ -47,23 +47,7 @@ impl TextureKind {
             0 => Ok(TextureKind::Base),
             1 => Ok(TextureKind::Var),
             2 => Ok(TextureKind::Anm),
-            n => bail!("Invalid tileset index"),
-        }
-    }
-
-    fn get_raw(&self) -> usize {
-        match self {
-            TextureKind::Base => 0,
-            TextureKind::Var => 1,
-            TextureKind::Anm => 2,
-        }
-    }
-
-    fn get_suffix(&self) -> &'static str {
-        match self {
-            TextureKind::Base => "base",
-            TextureKind::Var => "var",
-            TextureKind::Anm => "anm",
+            _ => bail!("Invalid tileset index"),
         }
     }
 }
