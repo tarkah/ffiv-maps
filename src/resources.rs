@@ -1,3 +1,3 @@
-mod map;
-
-pub use map::{Map, TextureKind};
+pub mod game;
+pub mod map;
+pub mod sprites;

@@ -17,7 +17,7 @@ use amethyst::{
     Application, GameDataBuilder,
 };
 
-use resources::Map;
+use resources::map::Map;
 
 mod components;
 mod resources;
@@ -53,7 +53,6 @@ fn main() -> amethyst::Result<()> {
         .with(Processor::<Map>::new(), "map_processor", &[])
         .with(systems::InputSystem, "game_input_system", &["input_system"])
         .with(systems::CleanupSystem, "cleanup_system", &[]);
-
     let mut game =
         Application::build(assets_path, states::LoadState::default())?.build(game_data)?;
 

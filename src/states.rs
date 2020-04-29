@@ -1,3 +1,3 @@
 mod load;
 
-pub use load::{Game, LoadState, MapSpriteSheets};
+pub use load::LoadState;

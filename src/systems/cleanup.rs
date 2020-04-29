@@ -4,7 +4,7 @@ use amethyst::{
     utils::removal::{exec_removal, Removal},
 };
 
-use crate::states::Game;
+use crate::resources::game::Game;
 
 #[derive(SystemDesc)]
 pub struct CleanupSystem;

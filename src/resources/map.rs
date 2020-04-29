@@ -7,15 +7,14 @@ use amethyst::{
     core::Transform,
     ecs::{prelude::World, VecStorage},
     prelude::{Builder, WorldExt},
-    renderer::{sprite::SpriteRender, transparent::Transparent},
+    renderer::sprite::{SpriteRender, SpriteSheetHandle},
     utils::removal::Removal,
     window::ScreenDimensions,
 };
 use serde::{Deserialize, Serialize};
 
+use std::collections::HashMap;
 use std::path::PathBuf;
-
-use crate::states::MapSpriteSheets;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Eq, Hash)]
 pub enum TextureKind {
@@ -66,6 +65,21 @@ struct Cell {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 struct Layer {
     cells: Vec<Cell>,
+}
+
+#[derive(Default)]
+pub struct MapSpriteSheets {
+    sprite_sheets: HashMap<TextureKind, SpriteSheetHandle>,
+}
+
+impl MapSpriteSheets {
+    pub fn insert(&mut self, texture_kind: TextureKind, sprite_sheet_handle: SpriteSheetHandle) {
+        self.sprite_sheets.insert(texture_kind, sprite_sheet_handle);
+    }
+
+    pub fn get(&self, texture_kind: TextureKind) -> Option<&SpriteSheetHandle> {
+        self.sprite_sheets.get(&texture_kind)
+    }
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -129,7 +143,6 @@ impl Map {
                 .create_entity()
                 .with(transform)
                 .with(render)
-                .with(Transparent)
                 .with(Removal::new(0usize))
                 .build();
 
