@@ -1,9 +1,12 @@
 use amethyst::{
     assets::{AssetStorage, Handle, Loader, ProgressCounter, RonFormat},
+    core::Time,
+    ecs::{Dispatcher, DispatcherBuilder},
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
-use crate::components::{animation::Animation, subject::Subject};
+use std::time::Duration;
+
 use crate::entities::{
     camera::load_camera,
     camera_subject::{center_camera_subject, load_camera_subject},
@@ -15,21 +18,59 @@ use crate::resources::{
     map::{Map, MapSpriteSheets, TextureKind},
     sprites::get_sprite_sheet_handle,
 };
+use crate::systems;
 
 #[derive(Default)]
-pub struct LoadState {
+pub struct LoadState<'a, 'b> {
     pub progress_counter: Option<ProgressCounter>,
     pub map_handle: Option<Handle<Map>>,
     pub first_load: bool,
+    dispatcher: Option<Dispatcher<'a, 'b>>,
 }
 
-impl SimpleState for LoadState {
+impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
-        // Needed until used in a system
-        world.register::<Subject>();
-        world.register::<Animation>();
+        let mut dispatcher = DispatcherBuilder::new()
+            .with(systems::MapInputSystem, "map_input_system", &[])
+            .with(
+                systems::PlayerOneInputSystem,
+                "player_one_input_system",
+                &[],
+            )
+            .with(systems::CleanupSystem, "cleanup_system", &[])
+            .with(
+                systems::PlayerOneTransformationSystem,
+                "player_one_transformation_system",
+                &["player_one_input_system"],
+            )
+            .with(
+                systems::CameraTransformationSystem,
+                "camera_transformation_system",
+                &["player_one_transformation_system"],
+            )
+            .with(
+                systems::PlayerOneAnimationSystem,
+                "player_one_animation_system",
+                &["player_one_transformation_system"],
+            )
+            .with(
+                systems::AnimationControlSystem,
+                "animation_control_system",
+                &["player_one_animation_system"],
+            )
+            .build();
+        dispatcher.setup(world);
+
+        self.dispatcher = Some(dispatcher);
+
+        {
+            let mut time = world.write_resource::<Time>();
+
+            let fixed_duration = Duration::from_micros(41_666);
+            time.set_fixed_time(fixed_duration);
+        }
 
         self.progress_counter = if self.first_load {
             Some(load_assets(world, vec![AssetType::PlayerOne]))
@@ -109,5 +150,13 @@ impl SimpleState for LoadState {
         } else {
             Trans::None
         }
+    }
+
+    fn fixed_update(&mut self, data: StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
+        if let Some(dispatcher) = self.dispatcher.as_mut() {
+            dispatcher.dispatch(&data.world);
+        }
+
+        Trans::None
     }
 }

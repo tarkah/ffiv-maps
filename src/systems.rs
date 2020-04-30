@@ -3,7 +3,8 @@ pub use animation::AnimationControlSystem;
 pub use animation::PlayerOneAnimationSystem;
 
 mod input;
-pub use input::InputSystem;
+pub use input::MapInputSystem;
+pub use input::PlayerOneInputSystem;
 
 mod cleanup;
 pub use cleanup::CleanupSystem;

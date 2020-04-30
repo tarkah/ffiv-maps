@@ -55,29 +55,7 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(TransformBundle::new().with_dep(&["sampler_interpolation_system"]))?
         .with_bundle(InputBundle::<StringBindings>::new().with_bindings_from_file(bindings_path)?)?
         .with_bundle(UiBundle::<StringBindings>::new())?
-        .with(Processor::<Map>::new(), "map_processor", &[])
-        .with(systems::InputSystem, "game_input_system", &["input_system"])
-        .with(systems::CleanupSystem, "cleanup_system", &[])
-        .with(
-            systems::PlayerOneTransformationSystem,
-            "player_one_transformation_system",
-            &["game_input_system"],
-        )
-        .with(
-            systems::CameraTransformationSystem,
-            "camera_transformation_system",
-            &["player_one_transformation_system"],
-        )
-        .with(
-            systems::PlayerOneAnimationSystem,
-            "player_one_animation_system",
-            &["player_one_transformation_system"],
-        )
-        .with(
-            systems::AnimationControlSystem,
-            "animation_control_system",
-            &["player_one_animation_system"],
-        );
+        .with(Processor::<Map>::new(), "map_processor", &[]);
 
     let mut state = states::LoadState::default();
     state.first_load = true;

@@ -6,22 +6,18 @@ use amethyst::{
 
 use crate::components::{
     direction::{Direction, Directions},
+    movement::Movement,
     player_one::{PlayerOne, PlayerOneState},
 };
 use crate::resources::game::Game;
 
 #[derive(SystemDesc)]
-pub struct InputSystem;
+pub struct MapInputSystem;
 
-impl<'s> System<'s> for InputSystem {
-    type SystemData = (
-        Read<'s, InputHandler<StringBindings>>,
-        Write<'s, Game>,
-        WriteStorage<'s, PlayerOne>,
-        WriteStorage<'s, Direction>,
-    );
+impl<'s> System<'s> for MapInputSystem {
+    type SystemData = (Read<'s, InputHandler<StringBindings>>, Write<'s, Game>);
 
-    fn run(&mut self, (input, mut game, mut player_one, mut directions): Self::SystemData) {
+    fn run(&mut self, (input, mut game): Self::SystemData) {
         if input.action_is_down("next").unwrap_or(false) && game.load_map.is_none() {
             let idx = (game.current_map + 1) % game.maps.len();
 
@@ -37,35 +33,44 @@ impl<'s> System<'s> for InputSystem {
 
             game.load_map = Some(idx);
         }
+    }
+}
+#[derive(SystemDesc)]
+pub struct PlayerOneInputSystem;
 
-        for (player_one, direction) in (&mut player_one, &mut directions).join() {
-            let mut x_amount = 0.0;
-            let mut y_amount = 0.0;
+impl<'s> System<'s> for PlayerOneInputSystem {
+    type SystemData = (
+        Read<'s, InputHandler<StringBindings>>,
+        WriteStorage<'s, PlayerOne>,
+        WriteStorage<'s, Direction>,
+        WriteStorage<'s, Movement>,
+    );
 
-            if let Some(amount) = input.axis_value("up_down") {
-                y_amount = amount;
-            }
+    fn run(&mut self, (input, mut player_one, mut directions, mut movements): Self::SystemData) {
+        for (player_one, direction, movement) in
+            (&mut player_one, &mut directions, &mut movements).join()
+        {
+            if movement.count == 0 {
+                let x_amount = input.axis_value("left_right").unwrap_or(0.0);
+                let y_amount = input.axis_value("up_down").unwrap_or(0.0);
 
-            if let Some(amount) = input.axis_value("left_right") {
-                x_amount = amount;
-            }
+                direction.previous = direction.current;
 
-            direction.previous = direction.current;
-
-            if y_amount > 0.0 {
-                direction.current = Directions::Up;
-                player_one.state = PlayerOneState::Running;
-            } else if y_amount < 0.0 {
-                direction.current = Directions::Down;
-                player_one.state = PlayerOneState::Running;
-            } else if x_amount > 0.0 {
-                direction.current = Directions::Right;
-                player_one.state = PlayerOneState::Running;
-            } else if x_amount < 0.0 {
-                direction.current = Directions::Left;
-                player_one.state = PlayerOneState::Running;
-            } else {
-                player_one.state = PlayerOneState::Idle;
+                if y_amount > 0.0 {
+                    direction.current = Directions::Up;
+                    player_one.state = PlayerOneState::Running;
+                } else if y_amount < 0.0 {
+                    direction.current = Directions::Down;
+                    player_one.state = PlayerOneState::Running;
+                } else if x_amount > 0.0 {
+                    direction.current = Directions::Right;
+                    player_one.state = PlayerOneState::Running;
+                } else if x_amount < 0.0 {
+                    direction.current = Directions::Left;
+                    player_one.state = PlayerOneState::Running;
+                } else {
+                    player_one.state = PlayerOneState::Idle;
+                }
             }
         }
     }

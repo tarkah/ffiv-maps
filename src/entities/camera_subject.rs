@@ -27,7 +27,7 @@ pub fn center_camera_subject(world: &mut World, map: &Map) {
     for (transform, _) in (&mut transforms, &subjects).join() {
         transform.set_translation_xyz(
             (map.width as f32 * 32.0) / 2.0 + 16.0,
-            (map.height as f32 * 32.0) / 2.0 + 16.0,
+            (map.height as f32 * 32.0) / 2.0,
             10.0,
         );
     }

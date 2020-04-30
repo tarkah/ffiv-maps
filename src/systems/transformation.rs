@@ -5,6 +5,7 @@ use amethyst::{
 
 use crate::components::{
     direction::{Direction, Directions},
+    movement::Movement,
     player_one::{PlayerOne, PlayerOneState},
     subject::Subject,
 };
@@ -17,12 +18,15 @@ impl<'s> System<'s> for PlayerOneTransformationSystem {
         ReadStorage<'s, PlayerOne>,
         ReadStorage<'s, Direction>,
         WriteStorage<'s, Transform>,
+        WriteStorage<'s, Movement>,
     );
 
-    fn run(&mut self, (player_one, directions, mut transforms): Self::SystemData) {
-        for (player, direction, transform) in (&player_one, &directions, &mut transforms).join() {
+    fn run(&mut self, (player_one, directions, mut transforms, mut movements): Self::SystemData) {
+        for (player, direction, transform, movement) in
+            (&player_one, &directions, &mut transforms, &mut movements).join()
+        {
             if player.state == PlayerOneState::Running {
-                let run_amount = 4.0;
+                let run_amount = 3.2;
 
                 match direction.current {
                     Directions::Up => {
@@ -38,13 +42,16 @@ impl<'s> System<'s> for PlayerOneTransformationSystem {
                         transform.prepend_translation_x(-run_amount);
                     }
                 }
+
+                movement.count = (movement.count + 1) % 10;
             }
 
-            if (direction.current == Directions::Right && direction.previous != Directions::Right)
+            if ((direction.current == Directions::Right && direction.previous != Directions::Right)
                 || (direction.current != Directions::Right
-                    && direction.previous == Directions::Right)
+                    && direction.previous == Directions::Right))
+                && movement.count == 1
             {
-                transform.scale_mut().x = transform.scale().x * -1.0;
+                transform.scale_mut().x *= -1.0;
             }
         }
     }
