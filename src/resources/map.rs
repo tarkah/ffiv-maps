@@ -9,12 +9,13 @@ use amethyst::{
     prelude::{Builder, WorldExt},
     renderer::sprite::{SpriteRender, SpriteSheetHandle},
     utils::removal::Removal,
-    window::ScreenDimensions,
 };
 use serde::{Deserialize, Serialize};
 
 use std::collections::HashMap;
 use std::path::PathBuf;
+
+use crate::components::animation::AnimationId;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Eq, Hash)]
 pub enum TextureKind {
@@ -106,11 +107,6 @@ impl Map {
     }
 
     fn load_layer(&self, world: &mut World, layer: &Layer, layer_idx: usize) {
-        let screen_height = {
-            let dim = world.fetch::<ScreenDimensions>();
-            dim.height()
-        };
-
         let (base_sheet, var_sheet, anm_sheet) = {
             let map_sheets = world.read_resource::<MapSpriteSheets>();
             (
@@ -153,7 +149,7 @@ impl Map {
                 let render_4 = SpriteRenderPrimitive::SpriteIndex((cell.index + 3) as usize);
 
                 let sampler = Sampler {
-                    input: vec![0.0, 0.2, 0.4, 0.6],
+                    input: vec![0.0, 0.25, 0.50, 0.75],
                     output: vec![render_1, render_2, render_3, render_4],
                     function: InterpolationFunction::Step,
                 };
@@ -172,11 +168,12 @@ impl Map {
                     animation_store.insert(animation)
                 };
 
-                let mut storage = world.write_storage::<AnimationControlSet<usize, SpriteRender>>();
+                let mut storage =
+                    world.write_storage::<AnimationControlSet<AnimationId, SpriteRender>>();
                 let control_set = get_animation_set(&mut storage, entity).unwrap();
 
                 control_set.add_animation(
-                    0,
+                    AnimationId::Map,
                     &animation_hanle,
                     EndControl::Loop(None),
                     1.0,

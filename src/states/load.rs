@@ -3,8 +3,14 @@ use amethyst::{
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
-use crate::components::camera::{center_camera_on_map, load_camera};
+use crate::components::{animation::Animation, subject::Subject};
+use crate::entities::{
+    camera::load_camera,
+    camera_subject::{center_camera_subject, load_camera_subject},
+    player_one::load_player_one,
+};
 use crate::resources::{
+    asset::{load_assets, AssetType, PrefabList},
     game::Game,
     map::{Map, MapSpriteSheets, TextureKind},
     sprites::get_sprite_sheet_handle,
@@ -14,13 +20,22 @@ use crate::resources::{
 pub struct LoadState {
     pub progress_counter: Option<ProgressCounter>,
     pub map_handle: Option<Handle<Map>>,
+    pub first_load: bool,
 }
 
 impl SimpleState for LoadState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
-        self.progress_counter = Some(ProgressCounter::default());
+        // Needed until used in a system
+        world.register::<Subject>();
+        world.register::<Animation>();
+
+        self.progress_counter = if self.first_load {
+            Some(load_assets(world, vec![AssetType::PlayerOne]))
+        } else {
+            Some(ProgressCounter::default())
+        };
 
         self.map_handle = {
             let mut game = world.write_resource::<Game>();
@@ -39,7 +54,8 @@ impl SimpleState for LoadState {
             ))
         };
 
-        load_camera(world);
+        let subject = load_camera_subject(world);
+        load_camera(world, subject);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
@@ -53,6 +69,12 @@ impl SimpleState for LoadState {
                     map_storage.get(map_handle).unwrap().clone()
                 };
 
+                {
+                    let mut game = data.world.write_resource::<Game>();
+                    game.map_width = map.width as f32 * 32.0;
+                    game.map_height = map.height as f32 * 32.0;
+                }
+
                 let mut map_sheets = MapSpriteSheets::default();
 
                 let base_sheet = get_sprite_sheet_handle(&data.world, &map.base, 16, 16, (32, 32));
@@ -65,9 +87,16 @@ impl SimpleState for LoadState {
 
                 data.world.insert(map_sheets);
 
-                center_camera_on_map(data.world, &map);
+                center_camera_subject(data.world, &map);
 
                 map.load_map(data.world);
+
+                let player_one_prefab_handle = {
+                    let prefab_list = data.world.read_resource::<PrefabList>();
+                    prefab_list.get(AssetType::PlayerOne).unwrap().clone()
+                };
+
+                load_player_one(data.world, &map, player_one_prefab_handle);
 
                 self.progress_counter = None;
             }

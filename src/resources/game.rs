@@ -2,6 +2,8 @@ pub struct Game {
     pub load_map: Option<usize>,
     pub maps: [&'static str; 5],
     pub current_map: usize,
+    pub map_width: f32,
+    pub map_height: f32,
 }
 
 impl Default for Game {
@@ -16,6 +18,8 @@ impl Default for Game {
                 "maps/ship_adamant_forest_01.ron",
                 "maps/town_mythril_01.ron",
             ],
+            map_width: 0.0,
+            map_height: 0.0,
         }
     }
 }

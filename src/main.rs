@@ -3,7 +3,7 @@
 
 use amethyst::{
     animation::AnimationBundle,
-    assets::Processor,
+    assets::{PrefabLoaderSystemDesc, Processor},
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     renderer::{
@@ -17,9 +17,11 @@ use amethyst::{
     Application, GameDataBuilder,
 };
 
+use components::animation::{AnimationId, AnimationPrefabData};
 use resources::map::Map;
 
 mod components;
+mod entities;
 mod resources;
 mod states;
 mod systems;
@@ -32,7 +34,10 @@ fn main() -> amethyst::Result<()> {
     let bindings_path = root.join("resources/bindings.ron");
     let assets_path = root.join("assets");
 
+    let prefab_loader_system_desc = PrefabLoaderSystemDesc::<AnimationPrefabData>::default();
+
     let game_data = GameDataBuilder::default()
+        .with_system_desc(prefab_loader_system_desc, "scene_loader", &[])
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
@@ -43,8 +48,8 @@ fn main() -> amethyst::Result<()> {
                 .with_plugin(RenderFlat2D::default())
                 .with_plugin(RenderUi::default()),
         )?
-        .with_bundle(AnimationBundle::<usize, SpriteRender>::new(
-            "animation_control_system",
+        .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
+            "sprite_animation_control_system",
             "sampler_interpolation_system",
         ))?
         .with_bundle(TransformBundle::new().with_dep(&["sampler_interpolation_system"]))?
@@ -52,9 +57,32 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(UiBundle::<StringBindings>::new())?
         .with(Processor::<Map>::new(), "map_processor", &[])
         .with(systems::InputSystem, "game_input_system", &["input_system"])
-        .with(systems::CleanupSystem, "cleanup_system", &[]);
-    let mut game =
-        Application::build(assets_path, states::LoadState::default())?.build(game_data)?;
+        .with(systems::CleanupSystem, "cleanup_system", &[])
+        .with(
+            systems::PlayerOneTransformationSystem,
+            "player_one_transformation_system",
+            &["game_input_system"],
+        )
+        .with(
+            systems::CameraTransformationSystem,
+            "camera_transformation_system",
+            &["player_one_transformation_system"],
+        )
+        .with(
+            systems::PlayerOneAnimationSystem,
+            "player_one_animation_system",
+            &["player_one_transformation_system"],
+        )
+        .with(
+            systems::AnimationControlSystem,
+            "animation_control_system",
+            &["player_one_animation_system"],
+        );
+
+    let mut state = states::LoadState::default();
+    state.first_load = true;
+
+    let mut game = Application::build(assets_path, state)?.build(game_data)?;
 
     game.run();
 
