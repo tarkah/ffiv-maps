@@ -2,8 +2,7 @@ use amethyst::{
     animation::AnimationSetPrefab,
     assets::{PrefabData, ProgressCounter},
     derive::PrefabData,
-    ecs::Entity,
-    ecs::{Component, DenseVecStorage},
+    ecs::{Component, DenseVecStorage, Entity},
     error::Error,
     renderer::sprite::{prefab::SpriteScenePrefab, SpriteRender},
 };

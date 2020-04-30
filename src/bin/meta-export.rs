@@ -178,12 +178,10 @@ fn add_triggers<R: ReadExt>(meta: &mut R, layers: &mut Vec<Layer>, width: usize,
     let mut buf = vec![0; cell_count * 2];
     let _ = meta.read_exact(&mut buf);
 
-    for i in 0..cell_count {
-        let lower = TriggerKind::new(buf[i * 2]);
-        let upper = TriggerKind::new(buf[i * 2 + 1]);
-
-        layers[0].cells[i].trigger = lower;
-        layers[1].cells[i].trigger = upper;
+    for layer in layers.iter_mut() {
+        for (idx, cell) in layer.cells.iter_mut().enumerate() {
+            cell.trigger = TriggerKind::new(buf[idx]);
+        }
     }
 }
 

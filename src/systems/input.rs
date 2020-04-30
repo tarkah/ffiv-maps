@@ -4,12 +4,14 @@ use amethyst::{
     input::{InputHandler, StringBindings},
 };
 
-use crate::components::{
-    direction::{Direction, Directions},
-    movement::Movement,
-    player_one::{PlayerOne, PlayerOneState},
+use crate::{
+    components::{
+        direction::{Direction, Directions},
+        movement::Movement,
+        player_one::{PlayerOne, PlayerOneState},
+    },
+    resources::game::Game,
 };
-use crate::resources::game::Game;
 
 #[derive(SystemDesc)]
 pub struct MapInputSystem;

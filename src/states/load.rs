@@ -1,24 +1,24 @@
 use amethyst::{
     assets::{AssetStorage, Handle, Loader, ProgressCounter, RonFormat},
-    core::Time,
+    core::{ArcThreadPool, Time},
     ecs::{Dispatcher, DispatcherBuilder},
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
 use std::time::Duration;
 
-use crate::entities::{
-    camera::load_camera,
-    camera_subject::{center_camera_subject, load_camera_subject},
-    player_one::load_player_one,
+use crate::{
+    entities::{
+        camera::load_camera, camera_subject::load_camera_subject, player_one::load_player_one,
+    },
+    resources::{
+        asset::{load_assets, AssetType, PrefabList},
+        game::Game,
+        map::{Map, MapSpriteSheets, TextureKind},
+        sprites::get_sprite_sheet_handle,
+    },
+    systems,
 };
-use crate::resources::{
-    asset::{load_assets, AssetType, PrefabList},
-    game::Game,
-    map::{Map, MapSpriteSheets, TextureKind},
-    sprites::get_sprite_sheet_handle,
-};
-use crate::systems;
 
 #[derive(Default)]
 pub struct LoadState<'a, 'b> {
@@ -39,6 +39,7 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 "player_one_input_system",
                 &[],
             )
+            .with(systems::DebugSystem, "debug_system", &[])
             .with(systems::CleanupSystem, "cleanup_system", &[])
             .with(
                 systems::PlayerOneTransformationSystem,
@@ -60,6 +61,7 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 "animation_control_system",
                 &["player_one_animation_system"],
             )
+            .with_pool((*world.read_resource::<ArcThreadPool>()).clone())
             .build();
         dispatcher.setup(world);
 
@@ -127,8 +129,6 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 map_sheets.insert(TextureKind::Anm, anm_sheet);
 
                 data.world.insert(map_sheets);
-
-                center_camera_subject(data.world, &map);
 
                 map.load_map(data.world);
 

@@ -3,13 +3,15 @@ use amethyst::{
     ecs::{Join, Read, ReadStorage, System, WriteStorage},
 };
 
-use crate::components::{
-    direction::{Direction, Directions},
-    movement::Movement,
-    player_one::{PlayerOne, PlayerOneState},
-    subject::Subject,
+use crate::{
+    components::{
+        direction::{Direction, Directions},
+        movement::Movement,
+        player_one::{PlayerOne, PlayerOneState},
+        subject::Subject,
+    },
+    resources::game::Game,
 };
-use crate::resources::game::Game;
 
 pub struct PlayerOneTransformationSystem;
 

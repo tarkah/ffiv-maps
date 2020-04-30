@@ -7,15 +7,20 @@ use amethyst::{
     core::Transform,
     ecs::{prelude::World, VecStorage},
     prelude::{Builder, WorldExt},
-    renderer::sprite::{SpriteRender, SpriteSheetHandle},
+    renderer::{
+        sprite::{SpriteRender, SpriteSheetHandle},
+        Transparent,
+    },
     utils::removal::Removal,
 };
 use serde::{Deserialize, Serialize};
 
-use std::collections::HashMap;
-use std::path::PathBuf;
+use std::{collections::HashMap, path::PathBuf};
 
-use crate::components::animation::AnimationId;
+use crate::components::{
+    animation::AnimationId,
+    map::{LowerTile, TriggerKind, UpperTile},
+};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Eq, Hash)]
 pub enum TextureKind {
@@ -27,32 +32,6 @@ pub enum TextureKind {
 impl Default for TextureKind {
     fn default() -> Self {
         TextureKind::Base
-    }
-}
-
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-enum TriggerKind {
-    Uninitialized,
-    Passable,
-    Blocker,
-    UpperLowerDelta,
-    LowerUpperDelta,
-    Hidden,
-    Bridge,
-    Damage,
-    BottomTransparent,
-    BottomHidden,
-    Unknown7,
-    Unknown12,
-    Unknown13,
-    Treasure(u8),
-    Exit(u8),
-    Unknown(u8),
-}
-
-impl Default for TriggerKind {
-    fn default() -> Self {
-        TriggerKind::Uninitialized
     }
 }
 
@@ -132,15 +111,24 @@ impl Map {
             transform.set_translation_xyz(
                 (idx % self.width) as f32 * 32.0 + 16.0,
                 (self.width as f32 * 32.0) - (((idx / self.width) as f32) * 32.0 + 16.0),
-                -1.0 * layer_idx as f32,
+                2.0 * (layer_idx as f32 - 1.0),
             );
 
-            let entity = world
+            let mut entity_builder = world
                 .create_entity()
+                .with(cell.trigger.clone())
                 .with(transform)
                 .with(render)
-                .with(Removal::new(0usize))
-                .build();
+                .with(Transparent)
+                .with(Removal::new(0usize));
+
+            entity_builder = if layer_idx == 0 {
+                entity_builder.with(LowerTile)
+            } else {
+                entity_builder.with(UpperTile)
+            };
+
+            let entity = entity_builder.build();
 
             if cell.kind == TextureKind::Anm {
                 let render_1 = SpriteRenderPrimitive::SpriteIndex(cell.index as usize);

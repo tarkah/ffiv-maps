@@ -7,21 +7,23 @@ use amethyst::{
     utils::removal::Removal,
 };
 
-use crate::components::{
-    animation::{Animation, AnimationId, AnimationPrefabData, CharacterAction},
-    direction::Direction,
-    movement::Movement,
-    player_one::PlayerOne,
+use crate::{
+    components::{
+        animation::{Animation, AnimationId, AnimationPrefabData, CharacterAction},
+        direction::Direction,
+        movement::Movement,
+        player_one::PlayerOne,
+    },
+    resources::map::Map,
 };
-use crate::resources::map::Map;
 
 pub fn load_player_one(world: &mut World, map: &Map, prefab: Handle<Prefab<AnimationPrefabData>>) {
     let mut transform = Transform::default();
 
     transform.set_translation_xyz(
         (map.width as f32 * 32.0) / 2.0 + 16.0,
-        (map.height as f32 * 32.0) / 2.0,
-        5.0,
+        (map.height as f32 * 32.0) / 2.0 - 16.0,
+        -1.0,
     );
 
     world

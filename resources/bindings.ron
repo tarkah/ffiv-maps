@@ -5,6 +5,7 @@
   },
   actions: {
     "next": [ [Key(Right)] ],
-    "previous": [ [Key(Left)] ]
+    "previous": [ [Key(Left)] ],
+    "toggle_debug": [ [Key(F12)] ],
   },
 )

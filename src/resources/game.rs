@@ -4,6 +4,7 @@ pub struct Game {
     pub current_map: usize,
     pub map_width: f32,
     pub map_height: f32,
+    pub debug_mode: DebugMode,
 }
 
 impl Default for Game {
@@ -20,6 +21,30 @@ impl Default for Game {
             ],
             map_width: 0.0,
             map_height: 0.0,
+            debug_mode: DebugMode::default(),
         }
+    }
+}
+
+#[derive(Debug)]
+pub enum DebugMode {
+    Disabled,
+    TintLowerLayer,
+    TintUpperLayer,
+}
+
+impl DebugMode {
+    pub fn toggle(&self) -> Self {
+        match self {
+            DebugMode::Disabled => DebugMode::TintLowerLayer,
+            DebugMode::TintLowerLayer => DebugMode::TintUpperLayer,
+            DebugMode::TintUpperLayer => DebugMode::Disabled,
+        }
+    }
+}
+
+impl Default for DebugMode {
+    fn default() -> Self {
+        DebugMode::Disabled
     }
 }
