@@ -1,12 +1,10 @@
 use amethyst::{
     core::{Parent, Transform},
-    ecs::{prelude::World, Entity, Join},
+    ecs::{prelude::World, Entity},
     prelude::{Builder, WorldExt},
     renderer::camera::Camera,
     window::ScreenDimensions,
 };
-
-use crate::resources::map::Map;
 
 pub fn load_camera(world: &mut World, camera_subject: Entity) {
     let (width, height) = {

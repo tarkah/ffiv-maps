@@ -1,12 +1,6 @@
 use amethyst::{
-    assets::{AssetStorage, Handle, Loader, Prefab, PrefabLoader, ProgressCounter, RonFormat},
+    assets::{Handle, Prefab, PrefabLoader, ProgressCounter, RonFormat},
     ecs::prelude::World,
-    prelude::WorldExt,
-    renderer::{
-        formats::texture::ImageFormat,
-        sprite::{SpriteSheetFormat, SpriteSheetHandle},
-        SpriteSheet, Texture,
-    },
 };
 
 use std::collections::HashMap;

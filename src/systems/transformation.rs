@@ -1,10 +1,7 @@
 use amethyst::{
     core::Transform,
     ecs::{Join, Read, ReadStorage, System, WriteStorage},
-    prelude::{World, WorldExt},
 };
-
-use std::f32::consts::PI;
 
 use crate::components::{
     direction::{Direction, Directions},
