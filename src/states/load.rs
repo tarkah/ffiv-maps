@@ -33,13 +33,22 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
         let world = data.world;
 
         let mut dispatcher = DispatcherBuilder::new()
-            .with(systems::MapInputSystem, "map_input_system", &[])
+            .with(systems::KeyReleaseSystem, "key_release_system", &[])
+            .with(
+                systems::MapInputSystem,
+                "map_input_system",
+                &["key_release_system"],
+            )
             .with(
                 systems::PlayerOneInputSystem,
                 "player_one_input_system",
                 &[],
             )
-            .with(systems::DebugSystem, "debug_system", &[])
+            .with(
+                systems::DebugSystem,
+                "debug_system",
+                &["key_release_system"],
+            )
             .with(systems::CleanupSystem, "cleanup_system", &[])
             .with(
                 systems::PlayerOneTransformationSystem,

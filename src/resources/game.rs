@@ -5,6 +5,7 @@ pub struct Game {
     pub map_width: f32,
     pub map_height: f32,
     pub debug_mode: DebugMode,
+    pub button_pressed: bool,
 }
 
 impl Default for Game {
@@ -22,6 +23,7 @@ impl Default for Game {
             map_width: 0.0,
             map_height: 0.0,
             debug_mode: DebugMode::default(),
+            button_pressed: false,
         }
     }
 }

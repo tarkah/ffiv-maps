@@ -2,7 +2,7 @@ mod animation;
 pub use animation::{AnimationControlSystem, PlayerOneAnimationSystem};
 
 mod input;
-pub use input::{MapInputSystem, PlayerOneInputSystem};
+pub use input::{KeyReleaseSystem, MapInputSystem, PlayerOneInputSystem};
 
 mod cleanup;
 pub use cleanup::CleanupSystem;

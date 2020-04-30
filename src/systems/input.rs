@@ -20,23 +20,30 @@ impl<'s> System<'s> for MapInputSystem {
     type SystemData = (Read<'s, InputHandler<StringBindings>>, Write<'s, Game>);
 
     fn run(&mut self, (input, mut game): Self::SystemData) {
-        if input.action_is_down("next").unwrap_or(false) && game.load_map.is_none() {
-            let idx = (game.current_map + 1) % game.maps.len();
+        if !game.button_pressed {
+            if input.action_is_down("next").unwrap_or(false) && game.load_map.is_none() {
+                game.button_pressed = true;
 
-            game.load_map = Some(idx);
-        }
+                let idx = (game.current_map + 1) % game.maps.len();
 
-        if input.action_is_down("previous").unwrap_or(false) && game.load_map.is_none() {
-            let idx = if game.current_map == 0 {
-                game.maps.len() - 1
-            } else {
-                game.current_map - 1
-            };
+                game.load_map = Some(idx);
+            }
 
-            game.load_map = Some(idx);
+            if input.action_is_down("previous").unwrap_or(false) && game.load_map.is_none() {
+                game.button_pressed = true;
+
+                let idx = if game.current_map == 0 {
+                    game.maps.len() - 1
+                } else {
+                    game.current_map - 1
+                };
+
+                game.load_map = Some(idx);
+            }
         }
     }
 }
+
 #[derive(SystemDesc)]
 pub struct PlayerOneInputSystem;
 
@@ -74,6 +81,19 @@ impl<'s> System<'s> for PlayerOneInputSystem {
                     player_one.state = PlayerOneState::Idle;
                 }
             }
+        }
+    }
+}
+
+#[derive(SystemDesc)]
+pub struct KeyReleaseSystem;
+
+impl<'s> System<'s> for KeyReleaseSystem {
+    type SystemData = (Read<'s, InputHandler<StringBindings>>, Write<'s, Game>);
+
+    fn run(&mut self, (input, mut game): Self::SystemData) {
+        if input.keys_that_are_down().peekable().peek().is_none() {
+            game.button_pressed = false;
         }
     }
 }

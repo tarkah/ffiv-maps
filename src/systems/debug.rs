@@ -28,7 +28,8 @@ impl<'s> System<'s> for DebugSystem {
         &mut self,
         (entities, mut tints, input, mut game, upper_tiles, lower_tiles, triggers): Self::SystemData,
     ) {
-        if input.action_is_down("toggle_debug").unwrap_or(false) {
+        if input.action_is_down("toggle_debug").unwrap_or(false) && !game.button_pressed {
+            game.button_pressed = true;
             game.debug_mode = game.debug_mode.toggle();
 
             match game.debug_mode {
