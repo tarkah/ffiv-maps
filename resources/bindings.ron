@@ -1,9 +1,10 @@
 (
-  axes: {
-    "up_down": Emulated(pos: Key(W), neg: Key(S)),
-    "left_right": Emulated(pos: Key(D), neg: Key(A)),
-  },
+  axes: {},
   actions: {
+    "n": [ [Key(W)] ],
+    "s": [ [Key(S)] ],
+    "e": [ [Key(D)] ],
+    "w": [ [Key(A)] ],
     "next": [ [Key(Right)] ],
     "previous": [ [Key(Left)] ],
     "toggle_debug": [ [Key(F12)] ],

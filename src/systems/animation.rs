@@ -80,13 +80,18 @@ impl<'s> System<'s> for PlayerOneAnimationSystem {
         {
             let new_animation_id = match player.state {
                 PlayerOneState::Idle => match direction.current {
-                    Directions::Up => AnimationId::Character(CharacterAction::IdleBackward),
-                    Directions::Down => AnimationId::Character(CharacterAction::IdleForward),
+                    Directions::North => AnimationId::Character(CharacterAction::IdleBackward),
+                    Directions::South => AnimationId::Character(CharacterAction::IdleForward),
+                    _ => AnimationId::Character(CharacterAction::IdleSideways),
+                },
+                PlayerOneState::Turning => match direction.current {
+                    Directions::North => AnimationId::Character(CharacterAction::IdleBackward),
+                    Directions::South => AnimationId::Character(CharacterAction::IdleForward),
                     _ => AnimationId::Character(CharacterAction::IdleSideways),
                 },
                 PlayerOneState::Running => match direction.current {
-                    Directions::Up => AnimationId::Character(CharacterAction::RunBackward),
-                    Directions::Down => AnimationId::Character(CharacterAction::RunForward),
+                    Directions::North => AnimationId::Character(CharacterAction::RunBackward),
+                    Directions::South => AnimationId::Character(CharacterAction::RunForward),
                     _ => AnimationId::Character(CharacterAction::RunSideways),
                 },
             };

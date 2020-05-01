@@ -1,11 +1,23 @@
 use amethyst::ecs::{Component, DenseVecStorage};
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Clone, Copy, Debug)]
 pub enum Directions {
-    Right,
-    Left,
-    Up,
-    Down,
+    North,
+    South,
+    East,
+    West,
+}
+
+impl From<&str> for Directions {
+    fn from(s: &str) -> Self {
+        match s {
+            "n" => Directions::North,
+            "s" => Directions::South,
+            "e" => Directions::East,
+            "w" => Directions::West,
+            _ => Directions::North,
+        }
+    }
 }
 
 #[derive(Component)]
@@ -18,8 +30,8 @@ pub struct Direction {
 impl Default for Direction {
     fn default() -> Self {
         Self {
-            current: Directions::Down,
-            previous: Directions::Down,
+            current: Directions::South,
+            previous: Directions::South,
         }
     }
 }

@@ -28,30 +28,30 @@ impl<'s> System<'s> for PlayerOneTransformationSystem {
             (&player_one, &directions, &mut transforms, &mut movements).join()
         {
             if player.state == PlayerOneState::Running {
-                let run_amount = 3.2;
+                let run_amount = 4.0;
 
                 match direction.current {
-                    Directions::Up => {
+                    Directions::North => {
                         transform.prepend_translation_y(run_amount);
                     }
-                    Directions::Down => {
+                    Directions::South => {
                         transform.prepend_translation_y(-run_amount);
                     }
-                    Directions::Right => {
-                        transform.prepend_translation_x(run_amount);
-                    }
-                    Directions::Left => {
+                    Directions::West => {
                         transform.prepend_translation_x(-run_amount);
+                    }
+                    Directions::East => {
+                        transform.prepend_translation_x(run_amount);
                     }
                 }
 
-                movement.count = (movement.count + 1) % 10;
+                movement.run_count = (movement.run_count + 1) % 8;
             }
 
-            if ((direction.current == Directions::Right && direction.previous != Directions::Right)
-                || (direction.current != Directions::Right
-                    && direction.previous == Directions::Right))
-                && movement.count == 1
+            if ((direction.current == Directions::East && direction.previous != Directions::East)
+                || (direction.current != Directions::East
+                    && direction.previous == Directions::East))
+                && (movement.run_count == 1 || player.state == PlayerOneState::Turning)
             {
                 transform.scale_mut().x *= -1.0;
             }
