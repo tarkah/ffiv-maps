@@ -35,8 +35,8 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
         let mut dispatcher = DispatcherBuilder::new()
             .with(systems::KeyReleaseSystem, "key_release_system", &[])
             .with(
-                systems::MapInputSystem,
-                "map_input_system",
+                systems::GeneralInputSystem,
+                "general_input_system",
                 &["key_release_system"],
             )
             .with(
@@ -70,6 +70,11 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 "animation_control_system",
                 &["player_one_animation_system"],
             )
+            .with(
+                systems::PlayerOneReloadSystem,
+                "player_one_reload_system",
+                &["general_input_system"],
+            )
             .with_pool((*world.read_resource::<ArcThreadPool>()).clone())
             .build();
         dispatcher.setup(world);
@@ -84,7 +89,18 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
         }
 
         self.progress_counter = if self.first_load {
-            Some(load_assets(world, vec![AssetType::PlayerOne]))
+            Some(load_assets(
+                world,
+                vec![
+                    AssetType::Cain,
+                    AssetType::Cecil,
+                    AssetType::Kyuucecil,
+                    AssetType::Kyuurydia,
+                    AssetType::Roza,
+                    AssetType::Rydia,
+                    AssetType::Yang,
+                ],
+            ))
         } else {
             Some(ProgressCounter::default())
         };
@@ -117,7 +133,7 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 // Get the map, which is loaded in the on_start function of load state.
                 let map = {
                     let map_storage = &data.world.read_resource::<AssetStorage<Map>>();
-                    let map_handle = &self.map_handle.take().unwrap();
+                    let map_handle = &self.map_handle.as_ref().unwrap();
                     map_storage.get(map_handle).unwrap().clone()
                 };
 
@@ -142,8 +158,12 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 map.load_map(data.world);
 
                 let player_one_prefab_handle = {
+                    let game = data.world.read_resource::<Game>();
                     let prefab_list = data.world.read_resource::<PrefabList>();
-                    prefab_list.get(AssetType::PlayerOne).unwrap().clone()
+                    prefab_list
+                        .get(game.chars[game.current_char])
+                        .unwrap()
+                        .clone()
                 };
 
                 load_player_one(data.world, &map, player_one_prefab_handle);
@@ -151,6 +171,8 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
                 self.progress_counter = None;
             }
         }
+
+        data.world.maintain();
 
         let game = data.world.read_resource::<Game>();
 

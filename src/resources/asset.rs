@@ -9,7 +9,13 @@ use crate::components::animation::AnimationPrefabData;
 
 #[derive(Copy, Clone, Eq, Hash, PartialEq)]
 pub enum AssetType {
-    PlayerOne,
+    Cain,
+    Cecil,
+    Kyuucecil,
+    Kyuurydia,
+    Roza,
+    Rydia,
+    Yang,
 }
 
 #[derive(Default)]
@@ -37,7 +43,13 @@ pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> Progre
 
     for &asset_type in asset_type_list.iter() {
         let ron_path = match asset_type {
-            AssetType::PlayerOne => "prefabs/character/cain.ron",
+            AssetType::Cain => "prefabs/character/cain.ron",
+            AssetType::Cecil => "prefabs/character/cecil.ron",
+            AssetType::Kyuucecil => "prefabs/character/kyuucecil.ron",
+            AssetType::Kyuurydia => "prefabs/character/kyuurydia.ron",
+            AssetType::Roza => "prefabs/character/roza.ron",
+            AssetType::Rydia => "prefabs/character/rydia.ron",
+            AssetType::Yang => "prefabs/character/yang.ron",
         };
 
         let handle = get_animation_prefab_handle(world, ron_path, &mut progress_counter);

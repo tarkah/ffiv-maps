@@ -5,8 +5,10 @@
     "s": [ [Key(S)] ],
     "e": [ [Key(D)] ],
     "w": [ [Key(A)] ],
-    "next": [ [Key(Right)] ],
-    "previous": [ [Key(Left)] ],
+    "next_map": [ [Key(Right)] ],
+    "previous_map": [ [Key(Left)] ],
+    "next_char": [ [Key(Up)] ],
+    "previous_char": [ [Key(Down)] ],
     "toggle_debug": [ [Key(F12)] ],
   },
 )

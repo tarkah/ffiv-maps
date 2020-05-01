@@ -19,14 +19,14 @@ use crate::{
 };
 
 #[derive(SystemDesc)]
-pub struct MapInputSystem;
+pub struct GeneralInputSystem;
 
-impl<'s> System<'s> for MapInputSystem {
+impl<'s> System<'s> for GeneralInputSystem {
     type SystemData = (Read<'s, InputHandler<StringBindings>>, Write<'s, Game>);
 
     fn run(&mut self, (input, mut game): Self::SystemData) {
         if !game.button_pressed {
-            if input.action_is_down("next").unwrap_or(false) && game.load_map.is_none() {
+            if input.action_is_down("next_map").unwrap_or(false) && game.load_map.is_none() {
                 game.button_pressed = true;
 
                 let idx = (game.current_map + 1) % game.maps.len();
@@ -34,7 +34,7 @@ impl<'s> System<'s> for MapInputSystem {
                 game.load_map = Some(idx);
             }
 
-            if input.action_is_down("previous").unwrap_or(false) && game.load_map.is_none() {
+            if input.action_is_down("previous_map").unwrap_or(false) && game.load_map.is_none() {
                 game.button_pressed = true;
 
                 let idx = if game.current_map == 0 {
@@ -44,6 +44,28 @@ impl<'s> System<'s> for MapInputSystem {
                 };
 
                 game.load_map = Some(idx);
+            }
+
+            if input.action_is_down("next_char").unwrap_or(false) && !game.load_char {
+                game.button_pressed = true;
+
+                let idx = (game.current_char + 1) % game.chars.len();
+
+                game.load_char = true;
+                game.current_char = idx;
+            }
+
+            if input.action_is_down("previous_char").unwrap_or(false) && !game.load_char {
+                game.button_pressed = true;
+
+                let idx = if game.current_char == 0 {
+                    game.chars.len() - 1
+                } else {
+                    game.current_char - 1
+                };
+
+                game.load_char = true;
+                game.current_char = idx;
             }
         }
     }

@@ -1,0 +1,197 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        // rydia
+        PrefabEntity(
+            data: AnimationPrefabData(
+                // SpriteScenePrefab
+                sprite_scene: (
+                    // SpriteSheetPrefab with index 0
+                    sheet: Sheet(
+                        // TexturePrefab
+                        texture: File("character/rydia.png", (
+                            "IMAGE", (
+                                sampler_info: (
+                                    min_filter: Nearest,
+                                    mag_filter: Nearest,
+                                    mip_filter: Nearest,
+                                    wrap_mode: (Tile, Tile, Tile),
+                                    lod_bias: (0),
+                                    lod_range: (
+                                        start: ( 0 ),
+                                        end: ( 8000 ),
+                                    ),
+                                    comparison: None,
+                                    border: (0),
+                                    anisotropic: Off,
+                                    normalized: true,
+                                ),
+                            ),
+                        )),
+                        sprites: [
+                            List((
+                                texture_width: 32,
+                                texture_height: 288,
+                                sprites: [
+                                    // Idle Forward
+                                    (x: 0, y: 0, width: 32, height: 32), // 1
+                                    // Run Forward
+                                    (x: 0, y: 32, width: 32, height: 32), // 2
+                                    (x: 0, y: 64, width: 32, height: 32), // 3
+                                    // Idle Backward
+                                    (x: 0, y: 96, width: 32, height: 32), // 4
+                                    // Run Backward
+                                    (x: 0, y: 128, width: 32, height: 32), // 5
+                                    (x: 0, y: 160, width: 32, height: 32), // 6
+                                    // Idle Sideways
+                                    (x: 0, y: 192, width: 32, height: 32), // 7
+                                    // Run Sideways
+                                    (x: 0, y: 224, width: 32, height: 32), // 8
+                                    (x: 0, y: 256, width: 32, height: 32), // 9
+                                ],
+                            )),
+                        ],
+                        // optional
+                        name: "rydia",
+                    ),
+                    // SpriteRenderPrefab
+                    render: (
+                        sheet: "rydia",
+                        sprite_number: 0,
+                    ),
+                ),
+                // AnimationSetPrefab
+                animation_set: (
+                    animations: [
+                        (
+                            // AnimationId
+                            Character(IdleForward),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 1.0],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [0, 0],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        (
+                            // AnimationId
+                            Character(RunForward),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 0.25, 0.50],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [1, 2, 1 ],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        (
+                            // AnimationId
+                            Character(IdleBackward),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 1.0],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [3, 3],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        (
+                            // AnimationId
+                            Character(RunBackward),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 0.25, 0.50],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [4, 5, 4 ],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        (
+                            // AnimationId
+                            Character(IdleSideways),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 1.0],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [6, 6],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        (
+                            // AnimationId
+                            Character(RunSideways),
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 0.25, 0.50],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [7, 8, 7],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        ),
+    ],
+)
