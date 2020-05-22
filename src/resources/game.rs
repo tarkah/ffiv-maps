@@ -1,10 +1,11 @@
-use crate::resources::asset::AssetType;
+use crate::resources::asset::{AssetType, Audio, Character};
 
 pub struct Game {
     pub load_map: Option<usize>,
     pub maps: [&'static str; 5],
     pub load_char: bool,
     pub chars: [AssetType; 7],
+    pub music: [AssetType; 2],
     pub current_map: usize,
     pub current_char: usize,
     pub map_width: f32,
@@ -28,13 +29,17 @@ impl Default for Game {
             ],
             load_char: false,
             chars: [
-                AssetType::Cain,
-                AssetType::Cecil,
-                AssetType::Kyuucecil,
-                AssetType::Kyuurydia,
-                AssetType::Roza,
-                AssetType::Rydia,
-                AssetType::Yang,
+                AssetType::Character(Character::Cain),
+                AssetType::Character(Character::Cecil),
+                AssetType::Character(Character::Kyuucecil),
+                AssetType::Character(Character::Kyuurydia),
+                AssetType::Character(Character::Roza),
+                AssetType::Character(Character::Rydia),
+                AssetType::Character(Character::Yang),
+            ],
+            music: [
+                AssetType::Audio(Audio::BgmAi),
+                AssetType::Audio(Audio::BgmPrologue),
             ],
             map_width: 0.0,
             map_height: 0.0,

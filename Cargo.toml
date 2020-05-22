@@ -18,9 +18,12 @@ structopt = "0.3"
 [dependencies.amethyst]
 version = "0.15.0"
 default-features = false
-features = ["animation"]
+features = ["animation", "audio"]
 
 [features]
 default = ["vulkan"]
 metal = ["amethyst/metal"]
 vulkan = ["amethyst/vulkan"]
+
+[patch.crates-io]
+amethyst = { git = "https://github.com/tarkah/amethyst", branch = "atrac3p" }

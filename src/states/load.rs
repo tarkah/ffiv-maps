@@ -1,8 +1,10 @@
+use amethyst::winit::{Event, WindowEvent};
 use amethyst::{
     assets::{AssetStorage, Handle, Loader, ProgressCounter, RonFormat},
+    audio::{output::Output, AudioSink},
     core::{ArcThreadPool, Time},
     ecs::{Dispatcher, DispatcherBuilder},
-    prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
+    prelude::{GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans, World, WorldExt},
 };
 
 use std::time::Duration;
@@ -12,7 +14,7 @@ use crate::{
         camera::load_camera, camera_subject::load_camera_subject, player_one::load_player_one,
     },
     resources::{
-        asset::{load_assets, AssetType, PrefabList},
+        asset::{load_assets, PrefabList},
         game::Game,
         map::{Map, MapSpriteSheets, TextureKind},
         sprites::get_sprite_sheet_handle,
@@ -89,18 +91,15 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
         }
 
         self.progress_counter = if self.first_load {
-            Some(load_assets(
-                world,
-                vec![
-                    AssetType::Cain,
-                    AssetType::Cecil,
-                    AssetType::Kyuucecil,
-                    AssetType::Kyuurydia,
-                    AssetType::Roza,
-                    AssetType::Rydia,
-                    AssetType::Yang,
-                ],
-            ))
+            let mut assets = vec![];
+
+            {
+                let game = world.read_resource::<Game>();
+                assets.extend_from_slice(&game.chars);
+                assets.extend_from_slice(&game.music);
+            }
+
+            Some(load_assets(world, &assets))
         } else {
             Some(ProgressCounter::default())
         };
@@ -174,9 +173,14 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
 
         data.world.maintain();
 
-        let game = data.world.read_resource::<Game>();
+        let load_map = {
+            let game = data.world.read_resource::<Game>();
+            game.load_map
+        };
 
-        if game.load_map.is_some() {
+        if load_map.is_some() {
+            stop_music(&mut data.world);
+
             Trans::Replace(Box::new(LoadState::default()))
         } else {
             Trans::None
@@ -189,5 +193,36 @@ impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
         }
 
         Trans::None
+    }
+
+    fn handle_event(
+        &mut self,
+        _data: StateData<'_, GameData<'_, '_>>,
+        event: StateEvent,
+    ) -> SimpleTrans {
+        #[allow(clippy::single_match)]
+        match event {
+            StateEvent::Window(event) => match event {
+                Event::WindowEvent { event, .. } => match event {
+                    WindowEvent::Resized(_size) => {}
+                    _ => {}
+                },
+                _ => {}
+            },
+            _ => {}
+        }
+
+        Trans::None
+    }
+}
+
+fn stop_music(world: &mut World) {
+    let sink = if let Some(ref output) = world.try_fetch::<Output>() {
+        Some(AudioSink::new(output))
+    } else {
+        None
+    };
+    if let Some(sink) = sink {
+        world.insert(sink);
     }
 }

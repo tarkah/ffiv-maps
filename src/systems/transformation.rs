@@ -51,7 +51,8 @@ impl<'s> System<'s> for PlayerOneTransformationSystem {
             if ((direction.current == Directions::East && direction.previous != Directions::East)
                 || (direction.current != Directions::East
                     && direction.previous == Directions::East))
-                && (movement.run_count == 1 || player.state == PlayerOneState::Turning)
+                && movement.run_count == 1
+            // || player.state == PlayerOneState::Turning)
             {
                 transform.scale_mut().x *= -1.0;
             }

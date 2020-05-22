@@ -1,4 +1,5 @@
 (
   title: "ffiv-maps",
-  dimensions: Some((480, 272)),
+  dimensions: Some((960, 544)),
+  min_dimensions: Some((480,272)),
 )

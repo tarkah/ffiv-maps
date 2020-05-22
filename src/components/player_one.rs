@@ -3,7 +3,7 @@ use amethyst::ecs::{Component, DenseVecStorage};
 #[derive(Eq, Hash, PartialEq, Clone, Copy)]
 pub enum PlayerOneState {
     Idle,
-    Turning,
+    //Turning,
     Running,
 }
 

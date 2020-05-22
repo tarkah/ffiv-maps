@@ -4,6 +4,7 @@
 use amethyst::{
     animation::AnimationBundle,
     assets::{PrefabLoaderSystemDesc, Processor},
+    audio::{AudioBundle, DjSystemDesc},
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     renderer::{
@@ -18,7 +19,7 @@ use amethyst::{
 };
 
 use components::animation::{AnimationId, AnimationPrefabData};
-use resources::map::Map;
+use resources::{asset::Music, map::Map};
 
 mod components;
 mod entities;
@@ -55,12 +56,20 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(TransformBundle::new().with_dep(&["sampler_interpolation_system"]))?
         .with_bundle(InputBundle::<StringBindings>::new().with_bindings_from_file(bindings_path)?)?
         .with_bundle(UiBundle::<StringBindings>::new())?
+        .with_bundle(AudioBundle::default())?
+        .with_system_desc(
+            DjSystemDesc::new(|music: &mut Music| music.music.next()),
+            "dj_system",
+            &[],
+        )
         .with(Processor::<Map>::new(), "map_processor", &[]);
 
     let mut state = states::LoadState::default();
     state.first_load = true;
 
-    let mut game = Application::build(assets_path, state)?.build(game_data)?;
+    let mut game = Application::build(assets_path, state)?
+        //.with_frame_limit(FrameRateLimitStrategy::Sleep, 60)
+        .build(game_data)?;
 
     game.run();
 

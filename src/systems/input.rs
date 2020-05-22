@@ -114,26 +114,32 @@ impl<'s> System<'s> for PlayerOneInputSystem {
                     direction.previous = direction.current;
                     direction.current = new_direction;
 
-                    if new_direction == direction.previous
-                        && player_one.state == PlayerOneState::Turning
-                        && movement.turn_count != 0
-                    {
-                        movement.turn_count = (movement.turn_count + 1) % 3;
-                        return;
-                    }
+                    // if new_direction == direction.previous
+                    //     && player_one.state == PlayerOneState::Turning
+                    //     && movement.turn_count != 0
+                    // {
+                    //     movement.turn_count = (movement.turn_count + 1) % 3;
+                    //     return;
+                    // }
 
-                    if player_one.state == PlayerOneState::Idle {
-                        player_one.state = PlayerOneState::Turning;
-                        movement.turn_count += 1;
-                    } else if is_blocker(player_transform, new_direction, &triggers, &transforms) {
+                    // if player_one.state == PlayerOneState::Idle {
+                    //     player_one.state = PlayerOneState::Turning;
+                    //     movement.turn_count += 1;
+                    // } else if is_blocker(player_transform, new_direction, &triggers, &transforms) {
+                    //     player_one.state = PlayerOneState::Idle;
+                    //     movement.turn_count = 0;
+                    // } else if movement.turn_count == 0 {
+                    //     player_one.state = PlayerOneState::Running;
+                    // }
+
+                    if is_blocker(player_transform, new_direction, &triggers, &transforms) {
                         player_one.state = PlayerOneState::Idle;
-                        movement.turn_count = 0;
-                    } else if movement.turn_count == 0 {
+                    } else {
                         player_one.state = PlayerOneState::Running;
                     }
                 } else {
                     player_one.state = PlayerOneState::Idle;
-                    movement.turn_count = 0;
+                    //     movement.turn_count = 0;
                 }
             }
         }

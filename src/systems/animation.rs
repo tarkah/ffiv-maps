@@ -84,11 +84,11 @@ impl<'s> System<'s> for PlayerOneAnimationSystem {
                     Directions::South => AnimationId::Character(CharacterAction::IdleForward),
                     _ => AnimationId::Character(CharacterAction::IdleSideways),
                 },
-                PlayerOneState::Turning => match direction.current {
-                    Directions::North => AnimationId::Character(CharacterAction::IdleBackward),
-                    Directions::South => AnimationId::Character(CharacterAction::IdleForward),
-                    _ => AnimationId::Character(CharacterAction::IdleSideways),
-                },
+                // PlayerOneState::Turning => match direction.current {
+                //     Directions::North => AnimationId::Character(CharacterAction::IdleBackward),
+                //     Directions::South => AnimationId::Character(CharacterAction::IdleForward),
+                //     _ => AnimationId::Character(CharacterAction::IdleSideways),
+                // },
                 PlayerOneState::Running => match direction.current {
                     Directions::North => AnimationId::Character(CharacterAction::RunBackward),
                     Directions::South => AnimationId::Character(CharacterAction::RunForward),
